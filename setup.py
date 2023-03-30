@@ -8,14 +8,14 @@ if os.path.isfile("requirements.txt"):
         kwargs["install_requires"] = f.read().splitlines()
 
 setuptools.setup(
-    name="Servirka Karel",
+    name="Mocniny",
     version="1.0",
-    author="Jan Švec",
-    author_email="honzas@ntis.zcu.cz",
+    author="Filip Polák",
+    author_email="polakf@kky.zcu.cz",
     description="Example dialog manager for SpeechCloud platform",
-    url="https://github.com/honzas83/speechcloud-servirka",
+    url="https://github.com/Filipfill123/mocniny",
     data_files=[("static", ["index.html"])],
-    py_modules=["servirka"],
+    py_modules=["mocniny"],
     python_requires='>=3.7',
     **kwargs
 )

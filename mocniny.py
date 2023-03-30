@@ -5,7 +5,7 @@ import logging
 from pprint import pprint, pformat
 from collections import Counter
 
-class ServirkaKarel(Dialog):
+class Mocniny(Dialog):
     def spoj_seznam(self, polozky, spojka):
         if len(polozky) == 0:
             return ""
@@ -87,4 +87,4 @@ class ServirkaKarel(Dialog):
 if __name__ == '__main__':
     logging.basicConfig(format='%(asctime)s %(levelname)-10s %(message)s', level=logging.DEBUG)
 
-    SpeechCloudWS.run(ServirkaKarel, address="0.0.0.0", port=8888, static_path="./static", static_route="/(.*)")
+    SpeechCloudWS.run(Mocniny, address="0.0.0.0", port=8888, static_path="./static", static_route="/(.*)")
