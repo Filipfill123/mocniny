@@ -4,18 +4,13 @@
   </head>
   <body>
      
-    <button id="send_message_empty"><img src="https://aux.iconspalace.com/uploads/1697641958429597199.png"></button>
-    <p>
     <button id="dialog_restart">Start dialog</button>
     <button id="dialog_stop">Stop dialog</button>
-    <p>
-    <label for="number">Zadejte číslo:</label>
-    <input type="text" id="number" name="number" required
-        minlength="4" maxlength="8" size="10">
-    <div id="log"></div>
 
-    <div id="doc" style="width: 40%; min-width: 40%; height: 100%; position: absolute; top: 0px; right: 0px"></div>
-
+    <label for="number_to_calculate">Zadejte číslo:</label>
+    <input type="number" id="number_to_calculate" name="number_to_calculate" required
+        min="0" max="1000" default="69">
+    <button id="send_number">Moc mocni</button>
 
     <audio id="audioout"></audio>
 
@@ -77,16 +72,18 @@ function choose(choices) {
 }
 
 /* Logovací funkce */
-function hlog(text) {
-    $("#log").prepend("<div>"+text+"<br/></div>");
-}
+// function hlog(text) {
+//     $("#log").prepend("<div>"+text+"<br/></div>");
+// }
 
 
 $( document ).ready(function() {
 
-    $("#send_message_empty").click(function () {
-        data = {};
-        speechCloud.dm_send_message({data: data});
+    $("#send_number").click(function () {
+        var number_to_square = document.getElementById("number_to_calculate").value
+        var number_to_say = parseInt(number_to_square*number_to_square, 10)
+        do_tts(number_to_say, "Katerina210")
+        document.getElementById("number_to_calculate").value = 0
     });
 
     /* Stavová proměnná a funkce pro spuštění/pozastavení rozpoznávání */
@@ -166,34 +163,13 @@ $( document ).ready(function() {
 
     window.speechCloud = speechCloud
 
-    var nabidka = {
-            "pivo": "49,-",
-            "whisky": "89,-",
-            "rum": "65,-",
-            "víno": "60,-",
-        }
+   
     speechCloud.on('_ws_session', function () {
-        hlog('Až budete chtít odejít, řeknětě "<i>nashledanou</i>".')
-        hlog('Až budete chtít zaplatit, řeknětě "<i>zaplatím</i>".')
-        
-        html = "<table cellspacing=15px><tr><th>Produkt</th><th>Cena</th></tr>";
-        for(var key in nabidka) {
-            var value = nabidka[key];
-            html += "<tr><td>"+key+"</td><td>"+value+"</td></tr>";
-                }
-        html += "</table>";
-        hlog(html)
-        hlog('Můžete si objednat z nabídky: ')
-        hlog('Stisknutím ikony servírky zavoláte obsluhu.')
-        hlog('\n')
-        hlog('<b>Vítejte v naší FAV hospodě!');
-        hlog('\n')
+        console.log("ws connected")
         
     });
     speechCloud.on('asr_ready', function () {
-        hlog('Servírka je připravena přijmout Vaši objednávku.')
-        hlog('<b>--------------------------------------------------------------</b>')
-        hlog('\n')
+        console.log("asr ready")
     });
 
     /* Při příchodu ASR výsledku */
@@ -204,16 +180,10 @@ $( document ).ready(function() {
         if(msg.result == ""){
             return;
         }
-        hlog("<b>Rozpoznáno: </b>" + msg.result);
-        hlog("\n");
-        console.log("Result ASR", msg);
 
     });
     speechCloud.on('dm_display', function(msg){
         console.log(msg)
-        hlog("<b>Obsluha: </b>" + msg.text);
-        hlog("\n");
-        console.log("Result DM", msg)
     });
 
 
