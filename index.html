@@ -113,6 +113,7 @@ $( document ).ready(function() {
 
     /* Syntéza řeči */
     function do_tts(text, voice) {
+        console.log("doing tts: ", text, voice)
         speechCloud.tts_synthesize({
             text: text,
             voice: voice
