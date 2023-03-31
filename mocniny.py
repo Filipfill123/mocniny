@@ -1,9 +1,6 @@
 from dialog import SpeechCloudWS, Dialog, ABNF_INLINE
-import random
 import asyncio
 import logging
-from pprint import pprint, pformat
-from collections import Counter
 
 class Mocniny(Dialog):
     async def main(self):

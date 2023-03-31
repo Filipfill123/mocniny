@@ -9,7 +9,7 @@
 
     <label for="number_to_calculate">Zadejte číslo:</label>
     <input type="number" id="number_to_calculate" name="number_to_calculate" required
-        min="0" max="1000" default="69">
+        min="0" max="1000">
     <button id="send_number">Moc mocni</button>
 
     <audio id="audioout"></audio>
@@ -150,7 +150,7 @@ $( document ).ready(function() {
     /* Proměnná, do které se uloží timeout pro SIP zavolání */
     var call_timeout = null;
 
-    var model_uri = " https://cak.zcu.cz:9443/v1/speechcloud/F54AC144-8AE0-4315-98B0-B47C4CA1B580"
+    var model_uri = " https://cak.zcu.cz:9443/v1/speechcloud/devel_polakf_mocniny"
     var options = {
         uri: model_uri,
         tts: "#audioout",
