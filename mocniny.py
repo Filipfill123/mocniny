@@ -7,7 +7,7 @@ class Mocniny(Dialog):
     async def main(self):
         HLAS = "Iva30"
 
-        await self.synthesize_and_wait(text="Dobrý den, jsem vaše virtuální mocnina Alžběta Druhá. Stiskněte tlačítko", voice=HLAS)
+        #await self.synthesize_and_wait(text="Dobrý den, jsem vaše virtuální mocnina Alžběta Druhá. Stiskněte tlačítko", voice=HLAS)
         while True:
             #self.sc.led_breath_slow()
             await asyncio.sleep(3600)
