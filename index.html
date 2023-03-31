@@ -82,7 +82,7 @@ $( document ).ready(function() {
     $("#send_number").click(function () {
         var number_to_square = document.getElementById("number_to_calculate").value
         var number_to_say = parseInt(number_to_square*number_to_square, 10)
-        do_tts(number_to_say, "Iva30")
+        do_tts("dvacet", "Iva30")
         document.getElementById("number_to_calculate").value = 0
     });
 
