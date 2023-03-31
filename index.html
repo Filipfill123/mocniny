@@ -81,7 +81,8 @@ $( document ).ready(function() {
 
     $("#send_number").click(function () {
         var number_to_square = document.getElementById("number_to_calculate").value
-        var number_to_say = parseInt(number_to_square*number_to_square, 10)
+        var number_squared = number_to_square*number_to_square
+        var number_to_say = number_squared.toString()
         do_tts(number_to_say, "Iva30")
         document.getElementById("number_to_calculate").value = 0
     });
