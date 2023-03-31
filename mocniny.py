@@ -5,7 +5,7 @@ import logging
 
 class Mocniny(Dialog):
     async def main(self):
-        HLAS = "Katerina210"
+        HLAS = "Iva30"
 
         await self.synthesize_and_wait(text="Dobrý den, jsem vaše virtuální mocnina Alžběta Druhá. Stiskněte tlačítko", voice=HLAS)
         while True:
