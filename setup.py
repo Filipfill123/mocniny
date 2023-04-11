@@ -14,7 +14,7 @@ setuptools.setup(
     author_email="polakf@kky.zcu.cz",
     description="Example dialog manager for SpeechCloud platform",
     url="https://github.com/Filipfill123/mocniny",
-    data_files=[("static", ["index.html"])],
+    data_files=[("static", ["index.html", "style.css"])],
     py_modules=["mocniny"],
     python_requires='>=3.7',
     **kwargs
