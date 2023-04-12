@@ -98,7 +98,7 @@ $( document ).ready(function() {
         if (!recognizing) {
             speechCloud.asr_recognize();
             recognizing = true;
-            document.getElementById("recognizeSpan").style.backgroundColor = "green"
+            // document.getElementById("recognizeSpan").style.backgroundColor = "green"
         };
     }
 
@@ -106,7 +106,7 @@ $( document ).ready(function() {
         if (recognizing) {
             speechCloud.asr_pause();
             recognizing = false;
-            document.getElementById("recognizeSpan").style.backgroundColor = "red"
+            // document.getElementById("recognizeSpan").style.backgroundColor = "red"
         }
     }
 
@@ -177,6 +177,7 @@ $( document ).ready(function() {
         console.log("asr ready")
         // do_tts("Dobrý den, jsem vaše virtuální mocnina Karel. Zadejte číslo pro mocnění, nebo můžete stisknout otazník, abyste věděli, jestli Vás poslouchám.", "Iva30")
         do_tts("Test test test", "Iva30")
+        document.getElementById("recognizeSpan").style.backgroundColor = "green"
     });
 
     /* Při příchodu ASR výsledku */
