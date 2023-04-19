@@ -11,10 +11,10 @@
         
     <label for="number_to_calculate">Zadejte číslo:</label>
     <input type="number" id="number_to_calculate" name="number_to_calculate" required
-        min="0" max="1000">
+        min="0" max="1000" value="0">
     <button style="margin: 0px 25px 0px 5px;" id="send_number">Mocni jako ďábel</button>
     <p></p>
-    <button style="margin: 0px 25px 0px 5px;" id="asr_start_stop">ASR</button>
+    <button style="margin: 0px 25px 0px 5px;" id="asr_start_stop">{button_value}</button>
     <span id="recognizeSpan" class="dot"></span>
     </div>    
 
@@ -78,6 +78,7 @@ function choose(choices) {
 
 
 $( document ).ready(function() {
+    var button_value = "Start ASR"
 
     var dict_of_numbers = {"jedna":1, "dva": 2, "tři": 3, "čtyři": 4, "pět": 5, "šest": 6, "sedm": 7, "osm": 8, "devět": 9, "deset": 10}
 
@@ -98,9 +99,13 @@ $( document ).ready(function() {
 
     $("#asr_start_stop").click(function () {
         if (recognizing){
+            console.log("pausing ASR")
+            button_value = "Start ASR"
             do_pause()
         }
         else if (!recognizing){
+            console.log("starting ASR")
+            button_value = "Stop ASR"
             do_recognize()
         }
     });
@@ -190,7 +195,7 @@ $( document ).ready(function() {
     speechCloud.on('asr_ready', function () {
         console.log("asr ready")
         // do_tts("Dobrý den, jsem vaše virtuální mocnina Karel. Zadejte číslo pro mocnění, nebo můžete stisknout otazník, abyste věděli, jestli Vás poslouchám.", "Iva30")
-        do_tts("Dobrý den. Zadejte číslo od jedné do deseti, nebo zmáčkněte tlačítko Spustit a řeknětě číslo.", "Iva30")
+        do_tts("Dobrý den. Zadejte číslo od jedné do deseti, nebo zmáčkněte tlačítko Spustit a řekněte číslo.", "Iva30")
         document.getElementById("recognizeSpan").style.backgroundColor = "green"
     });
 
@@ -205,6 +210,14 @@ $( document ).ready(function() {
         }
         else if(msg.result){
             console.log("ASR message with result: ", msg)
+
+            var number_to_square = dict_of_numbers[msg.word_1best]
+            var number_to_say = number_to_square.toString()
+            var number_squared = number_to_square*number_to_square
+            var number_squared_to_say = number_squared.toString()
+            do_tts("Druhá mocnina čísla " + number_to_say + " je " + number_squared_to_say, "Iva30")
+            document.getElementById("number_to_calculate").value = 0
+            
         }
 
     });
