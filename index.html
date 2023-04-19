@@ -14,7 +14,7 @@
         min="0" max="1000" value="0">
     <button style="margin: 0px 25px 0px 5px;" id="send_number">Mocni jako ďábel</button>
     <p></p>
-    <button style="margin: 0px 25px 0px 5px;" id="asr_start_stop">{button_value}</button>
+    <button style="margin: 0px 25px 0px 5px;" id="asr_start_stop">Start ASR</button>
     <span id="recognizeSpan" class="dot"></span>
     </div>    
 
@@ -100,23 +100,27 @@ $( document ).ready(function() {
     $("#asr_start_stop").click(function () {
         if (recognizing){
             console.log("pausing ASR")
-            button_value = "Start ASR"
+            var btn = document.getElementById("asr_start_stop")
+            btn.textContent = "Start ASR"
             do_pause()
         }
         else if (!recognizing){
             console.log("starting ASR")
-            button_value = "Stop ASR"
+            var btn = document.getElementById("asr_start_stop")
+            btn.textContent = "Stop ASR"
             do_recognize()
         }
     });
 
     /* Stavová proměnná a funkce pro spuštění/pozastavení rozpoznávání */
     var recognizing = false;
+    var listening = false;
 
     function do_recognize() {
         if (!recognizing) {
             speechCloud.asr_recognize();
             recognizing = true;
+            document.getElementById("recognizeSpan").style.backgroundColor = "green"
             // document.getElementById("recognizeSpan").style.backgroundColor = "green"
         };
     }
@@ -125,6 +129,7 @@ $( document ).ready(function() {
         if (recognizing) {
             speechCloud.asr_pause();
             recognizing = false;
+            document.getElementById("recognizeSpan").style.backgroundColor = "red"
             // document.getElementById("recognizeSpan").style.backgroundColor = "red"
         }
     }
@@ -196,7 +201,7 @@ $( document ).ready(function() {
         console.log("asr ready")
         // do_tts("Dobrý den, jsem vaše virtuální mocnina Karel. Zadejte číslo pro mocnění, nebo můžete stisknout otazník, abyste věděli, jestli Vás poslouchám.", "Iva30")
         do_tts("Dobrý den. Zadejte číslo od jedné do deseti, nebo zmáčkněte tlačítko Spustit a řekněte číslo.", "Iva30")
-        document.getElementById("recognizeSpan").style.backgroundColor = "green"
+        //document.getElementById("recognizeSpan").style.backgroundColor = "green"
     });
 
     /* Při příchodu ASR výsledku */
@@ -223,6 +228,10 @@ $( document ).ready(function() {
     });
     speechCloud.on('dm_display', function(msg){
         console.log(msg)
+    });
+
+    speechCloud.on('asr_signal', function(msg){
+        console.log("ASR signal: ", msg)
     });
 
 
