@@ -13,8 +13,8 @@
     <input type="number" id="number_to_calculate" name="number_to_calculate" required
         min="0" max="1000" value="0">
     <button style="margin: 0px 25px 0px 5px;" id="send_number">Mocni jako ďábel</button>
-    <p>Mic: <span id="asr_signal">0%</p>
-    <button style="margin: 0px 25px 0px 5px;" id="asr_start_stop">Start ASR</button>
+    <button style="margin: 0px 15px 0px 15px;" id="asr_start_stop">Start ASR</button>
+    <p>Mic: <span id="asr_signal">00%</p>
     <span id="recognizeSpan" class="dot"></span>
     </div>    
 
@@ -232,7 +232,8 @@ $( document ).ready(function() {
 
     speechCloud.on('asr_signal', function(msg){
         console.log("ASR signal: ", msg)
-       document.getElementById("asr_signal").textContent = msg["level"]*10 + "%" 
+        
+        document.getElementById("asr_signal").textContent = Math.round(msg["level"]*10) + "%" 
     });
 
 
