@@ -215,7 +215,6 @@ $( document ).ready(function() {
         }
         else if(msg.result){
             console.log("ASR message with result: ", msg)
-            try {
                 if (msg.word_1best in dict_of_numbers){
                     var number_to_square = dict_of_numbers[msg.word_1best]
                     var number_to_say = number_to_square.toString()
@@ -225,20 +224,9 @@ $( document ).ready(function() {
                     document.getElementById("number_to_calculate").value = 0
                 }
                 else {
-                    throw new Error("Key " + msg.word_1best + " is not in the dictionary.")
+                    
                     do_tts("Omlouvám se, asi jsem Vám nerozuměla.", "Iva30")
                 }
-            } 
-            catch {
-                console.error(error);
-
-            }
-            var number_to_square = dict_of_numbers[msg.word_1best]
-            var number_to_say = number_to_square.toString()
-            var number_squared = number_to_square*number_to_square
-            var number_squared_to_say = number_squared.toString()
-            do_tts("Druhá mocnina čísla " + number_to_say + " je " + number_squared_to_say, "Iva30")
-            document.getElementById("number_to_calculate").value = 0
             
         }
 
