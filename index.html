@@ -13,6 +13,8 @@
     <input type="number" id="number_to_calculate" name="number_to_calculate" required
         min="0" max="1000">
     <button style="margin: 0px 25px 0px 5px;" id="send_number">Mocni jako ďábel</button>
+    <p></p>
+    <button style="margin: 0px 25px 0px 5px;" id="asr_start_stop">ASR</button>
     <span id="recognizeSpan" class="dot"></span>
     </div>    
 
@@ -77,6 +79,8 @@ function choose(choices) {
 
 $( document ).ready(function() {
 
+    var dict_of_numbers = {"jedna":1, "dva": 2, "tři": 3, "čtyři": 4, "pět": 5, "šest": 6, "sedm": 7, "osm": 8, "devět": 9, "deset": 10}
+
     $("#send_message_empty").click(function () {
         data = {};
         speechCloud.dm_send_message({data: data});
@@ -85,10 +89,20 @@ $( document ).ready(function() {
 
     $("#send_number").click(function () {
         var number_to_square = document.getElementById("number_to_calculate").value
+        var number_to_say = number_to_square.toString()
         var number_squared = number_to_square*number_to_square
-        var number_to_say = number_squared.toString()
-        do_tts(number_to_say, "Iva30")
+        var number_squared_to_say = number_squared.toString()
+        do_tts("Druhá mocnina čísla " + number_to_say + " je " + number_squared_to_say, "Iva30")
         document.getElementById("number_to_calculate").value = 0
+    });
+
+    $("#asr_start_stop").click(function () {
+        if (recognizing){
+            do_pause()
+        }
+        else if (!recognizing){
+            do_recognize()
+        }
     });
 
     /* Stavová proměnná a funkce pro spuštění/pozastavení rozpoznávání */
@@ -176,17 +190,21 @@ $( document ).ready(function() {
     speechCloud.on('asr_ready', function () {
         console.log("asr ready")
         // do_tts("Dobrý den, jsem vaše virtuální mocnina Karel. Zadejte číslo pro mocnění, nebo můžete stisknout otazník, abyste věděli, jestli Vás poslouchám.", "Iva30")
-        do_tts("Test test test", "Iva30")
+        do_tts("Dobrý den. Zadejte číslo od jedné do deseti, nebo zmáčkněte tlačítko Spustit a řeknětě číslo.", "Iva30")
         document.getElementById("recognizeSpan").style.backgroundColor = "green"
     });
 
     /* Při příchodu ASR výsledku */
     speechCloud.on('asr_result', function (msg) {
         if (msg.partial_result) {
+            console.log("ASR message: ", msg)
             return;
         }
         if(msg.result == ""){
             return;
+        }
+        else if(msg.result){
+            console.log("ASR message with result: ", msg)
         }
 
     });
