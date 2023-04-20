@@ -16,7 +16,9 @@
     <button style="margin: 0px 15px 0px 15px;" id="asr_start_stop">Start ASR</button>
     <p>Mic: <span id="asr_signal">0%</p>
     <span id="recognizeSpan" class="dot"></span>
-    </div>    
+    </div>
+    <p>
+    <div id="log"></div>    
 
     <audio id="audioout"></audio>
 
@@ -116,6 +118,12 @@ $( document ).ready(function() {
     var recognizing = false;
     var listening = false;
 
+    /* Logovací funkce */
+    function hlog(text) {
+        $("#log").prepend("<div>"+text+"<br/></div>");
+        }
+
+
     function do_recognize() {
         if (!recognizing) {
             speechCloud.asr_recognize();
@@ -200,7 +208,7 @@ $( document ).ready(function() {
     speechCloud.on('asr_ready', function () {
         console.log("asr ready")
         // do_tts("Dobrý den, jsem vaše virtuální mocnina Karel. Zadejte číslo pro mocnění, nebo můžete stisknout otazník, abyste věděli, jestli Vás poslouchám.", "Iva30")
-        do_tts("Dobrý den. Zadejte číslo od jedné do deseti, nebo zmáčkněte tlačítko Spustit a řekněte číslo.", "Iva30")
+        do_tts("Dobrý den. Zadejte číslo od jedné do deseti, nebo zmáčkněte tlačítko ASR a řekněte číslo.", "Iva30")
         //document.getElementById("recognizeSpan").style.backgroundColor = "green"
     });
 
@@ -215,6 +223,8 @@ $( document ).ready(function() {
         }
         else if(msg.result){
             console.log("ASR message with result: ", msg)
+            hlog("<b>Rozpoznáno: </b>" + msg.result);
+            hlog("\n");
                 if (msg.word_1best in dict_of_numbers){
                     var number_to_square = dict_of_numbers[msg.word_1best]
                     var number_to_say = number_to_square.toString()
