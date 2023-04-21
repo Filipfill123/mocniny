@@ -176,7 +176,7 @@ $( document ).ready(function() {
         if (ignore_space) return;
 
         if (evt.keyCode == 32) {
-            setTimeout(function () {$("#send_message_empty").click()}, 100);
+            setTimeout(function () {$("#asr_start_stop").click()}, 100);
             evt.preventDefault();
         };
     });
@@ -233,7 +233,7 @@ $( document ).ready(function() {
                 }
                 else {
                     
-                    do_tts("Omlouvám se, asi jsem Vám nerozuměla.", "Iva30")
+                    do_tts("Toto je demo, umím pouze čísla od 1 do 10.", "Iva30")
                 }
             
         }
