@@ -244,6 +244,7 @@ $( document ).ready(function() {
     });
 
     speechCloud.on('asr_signal', function(msg){
+        console.log("SC: ", speechCloud)
         console.log("ASR signal: ", msg)
         if(msg.speech){
             document.getElementById("asr_signal").textContent = Math.round(msg["level"]*10) + "%" 
