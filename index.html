@@ -198,7 +198,7 @@ $( document ).ready(function() {
    
     speechCloud.on('_ws_session', function () {
         console.log("ws connected")
-        hlog("<b>Hello :)</b>");
+        hlog("<b>Initializing...</b>");
         hlog("\n");
     });
     speechCloud.on('asr_ready', function () {
@@ -233,7 +233,7 @@ $( document ).ready(function() {
                 }
                 else {
                     
-                    do_tts("Toto je demo, umím pouze čísla od 1 do 10.", "Iva30")
+                    do_tts("Toto je demo, umím pouze čísla od jedničky do desítky.", "Iva30")
                 }
             
         }
